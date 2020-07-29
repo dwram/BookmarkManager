@@ -4,9 +4,16 @@
   <input type='submit' value="Bookmarks">
 </form>
 
-<form action="/add-bookmark" method="post">
-  <label>New bookmark:</label>
+<form action="/bookmarks/new" method="post">
+  <label>NEW:</label>
   <input type='text' value ='Enter title here' id='title' name='title'>
   <input type='text' value='Enter bookmark here' id='url' name='url'>
   <input type='submit' value='Add Bookmark'>
+</form>
+
+<form action="/bookmarks/delete" method="post">
+  <label>DELETE:</label>
+  <input type='text' value ='Enter either title' id='remove_title' name='remove_title'>
+  <input type='text' value='or the URL' id='remove_url' name='remove_url'>
+  <input type='submit' value='Remove Bookmark'>
 </form>

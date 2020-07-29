@@ -18,7 +18,7 @@ Capybara.app = BookmarkManager
 
 RSpec.configure do |config|
 
-  config.before(:each) do
+  config.after(:each) do
     truncation
   end
 

@@ -2,11 +2,9 @@ require_relative './spec_helper'
 require_relative '../models/bookmark'
 
 describe Bookmark do
-
   url = 'https://www.google.com'; title = 'google'
 
   context 'empty bookmarks' do
-
     it '#all' do
       expect(Bookmark.all).to be_an Array
       Bookmark.add(title: title, url: url)
@@ -19,13 +17,26 @@ describe Bookmark do
       expect(Bookmark.all.map(&:itself).first.title).to include('google')
     end
 
+    it 'another add' do
+      title = 'netflix'; url = 'https://www.netflix.com'
+      expect { Bookmark.add(title: title, url: url) }.to change{ Bookmark.all.size }.by(1)
+    end
   end
 
-  context 'pre-populated DB'
+  context 'pre-populated DB' do
+
+    before 'pre-poulate' do
+      generate_example_bookmarks
+    end
 
     it 'web helper generation' do
-      generate_example_bookmarks
-      expect(Bookmark.all.map(&:itself).last.title).to include 'reddit'
+      expect(Bookmark.all.map(&:itself).last.title).to include 'google'
     end
+
+    it 'filters entry' do
+      #TODO: FILTER ENTRY SPEC
+    end
+
+  end
 
 end

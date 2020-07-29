@@ -1,9 +1,10 @@
 require 'pg'
 
 class Bookmark
-  attr_reader :url, :title
+  attr_reader :url, :title, :id
 
-  def initialize(url:,title:)
+  def initialize(id:, url:, title:)
+    @id = id
     @url = url
     @title = title
   end
@@ -20,8 +21,13 @@ class Bookmark
     connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}','#{title}')")
   end
 
+  def self.filter_by_title(title)
+    connection.exec("SELECT title, url FROM bookmarks WHERE title = '#{title}' OR title = '#{title.downcase}'
+    OR url LIKE '%#{title.downcase}%'")
+  end
+
   def self.all
-    connection.exec('SELECT * FROM bookmarks').map{ |record| Bookmark.new(url: record['url'], title: record['title']) }
+    connection.exec('SELECT * FROM bookmarks').map{ |record| Bookmark.new(id: record['id'], url: record['url'], title: record['title']) }
   end
 
 end
