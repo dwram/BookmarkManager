@@ -25,7 +25,8 @@ class BookmarkManager < Sinatra::Base
   end
 
   put '/bookmarks/:id' do
-    p params[:id]
+    Bookmark.update(id: params[:id],url: params[:url],title: params[title])
+    redirect to '/bookmarks'
   end
 
 

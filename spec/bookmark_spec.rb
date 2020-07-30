@@ -25,6 +25,8 @@ describe Bookmark do
 
   context 'pre-populated DB' do
 
+    id = 7
+
     before 'pre-poulate' do
       generate_example_bookmarks
     end
@@ -38,11 +40,17 @@ describe Bookmark do
     end
 
     it '#delete' do
-      id = 7
       deleted = Bookmark.delete(id).first
       expect{ Bookmark.delete(id) }.to change{Bookmark.all}
       expect(deleted['url']).to include 'google'
       expect(deleted['id']).to eq '7'
+    end
+
+    it '#update' do
+      updated = Bookmark.update(id: id, title: 'googler', url: 'https://www.googler.com')
+      expect(Bookmark.all.map(&:itself).last.title).to include 'googler'
+      expect(Bookmark.all.map(&:itself).last.title).not_to be 'google'
+      expect(updated.first['title']).to eq 'googler'
     end
 
   end

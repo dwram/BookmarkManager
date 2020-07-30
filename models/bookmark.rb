@@ -34,4 +34,8 @@ class Bookmark
     connection.exec("DELETE FROM bookmarks WHERE id = '#{id}' RETURNING id, url, title")
   end
 
+  def self.update(id:, url:, title:)
+    connection.exec("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}' RETURNING id, url, title")
+  end
+
 end

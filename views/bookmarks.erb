@@ -19,7 +19,16 @@ Bookmarks:
         </form>
       </td>
       <td>
-        PUT
+        <form action="/bookmarks/<%= bookmark.id %>" method="post">
+          <input type="hidden" type="hidden" name="_method" value="PUT">
+          <label>Update Title</label>
+            <input type='text' name='update_title' value='<%= bookmark.title %>'>
+          <br><br>
+          <label>Update URL</label>
+            <input type='text' name='update_url' value='<%= bookmark.url %>'>
+            <br><br>
+          <input type='submit' value="Update">
+        </form>
       </td>
     </tr>
 
