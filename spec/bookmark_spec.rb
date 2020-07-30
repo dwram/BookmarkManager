@@ -47,10 +47,10 @@ describe Bookmark do
     end
 
     it '#update' do
-      updated = Bookmark.update(id: id, title: 'googler', url: 'https://www.googler.com')
-      expect(Bookmark.all.map(&:itself).last.title).to include 'googler'
-      expect(Bookmark.all.map(&:itself).last.title).not_to be 'google'
-      expect(updated.first['title']).to eq 'googler'
+      updated = Bookmark.update(id: id, title: 'netflixer', url: 'https://www.netflixer.com')
+      expect(Bookmark.all.map(&:itself).last.title).to include 'netflixer'
+      expect(Bookmark.all.map(&:itself).last.title).not_to be 'netflix'
+      expect(updated.first['title']).to eq 'netflixer'
     end
 
   end

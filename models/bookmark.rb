@@ -1,5 +1,5 @@
 require 'pg'
-
+require_relative './database'
 class Bookmark
   attr_reader :url, :title, :id
 
@@ -18,24 +18,24 @@ class Bookmark
   def self.add(url:, title:)
     return unless url && title && url != /Enter URL here/i && title != /Enter title here/i
 
-    connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}','#{title}') RETURNING id, url, title")
+    DatabaseConnection.query("INSERT INTO bookmarks (url, title) VALUES('#{url}','#{title}') RETURNING id, url, title")
   end
 
   def self.filter_by_title(title)
-    connection.exec("SELECT title, url FROM bookmarks WHERE title = '#{title}' OR title = '#{title.downcase}'
+    DatabaseConnection.query("SELECT title, url FROM bookmarks WHERE title = '#{title}' OR title = '#{title.downcase}'
     OR url LIKE '%#{title.downcase}%'")
   end
 
   def self.all
-    connection.exec('SELECT * FROM bookmarks').map{ |record| Bookmark.new(id: record['id'], url: record['url'], title: record['title']) }
+    DatabaseConnection.query('SELECT * FROM bookmarks').map{ |record| Bookmark.new(id: record['id'], url: record['url'], title: record['title']) }
   end
 
   def self.delete(id)
-    connection.exec("DELETE FROM bookmarks WHERE id = '#{id}' RETURNING id, url, title")
+    DatabaseConnection.query("DELETE FROM bookmarks WHERE id = '#{id}' RETURNING id, url, title")
   end
 
   def self.update(id:, url:, title:)
-    connection.exec("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}' RETURNING id, url, title")
+    DatabaseConnection.query("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}' RETURNING id, url, title")
   end
 
 end
