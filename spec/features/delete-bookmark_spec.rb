@@ -12,7 +12,8 @@ feature '#delete_bookmark' do
   end
 
   scenario 'delete an entry' do
-
+    click_button 'Delete', :match => :first
+    expect(page).not_to have_content 'facebook'
   end
 
 end

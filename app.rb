@@ -20,8 +20,13 @@ class BookmarkManager < Sinatra::Base
   end
 
   delete'/bookmarks/:id' do
-    #TODO: DELETE METHOD
+    Bookmark.delete(params[:id])
     redirect to '/bookmarks'
   end
+
+  put '/bookmarks/:id' do
+    p params[:id]
+  end
+
 
 end

@@ -1,5 +1,30 @@
 Bookmarks:
+<table style="width:25%" border="1px solid black">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>URL</th>
+    <th>DELETE</th>
+    <th>UPDATE</th>
+  </tr>
 <% @bookmarks.each do |bookmark| %>
+    <tr>
+      <td><%= bookmark.id %></td>
+      <td><a href="<%= bookmark.url %>"><%= bookmark.title %></a></td>
+      <td><%= bookmark.url %></td>
+      <td>
+        <form action="/bookmarks/<%= bookmark.id %>" method="post">
+          <input id="hidden" type="hidden" name="_method" value="DELETE">
+          <input type='submit' value="Delete">
+        </form>
+      </td>
+      <td>
+        PUT
+      </td>
+    </tr>
+
+
+
   <ul>
     <li class="bookmark" id="bookmark-<%= bookmark.id %>">
       <label>
@@ -14,10 +39,10 @@ Bookmarks:
     </li>
   </ul>
 <% end %>
-
-
+</table>
+<br>
 <form action="/bookmarks/new" method="post">
   <input type='text' value ='Enter title here' id='title' name='title'>
-  <input type='text' value='Enter bookmark here' id='url' name='url'>
+  <input type='text' value='Enter URL here' id='url' name='url'>
   <input type='submit' value='Add Bookmark'>
 </form>

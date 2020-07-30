@@ -16,9 +16,9 @@ class Bookmark
   end
 
   def self.add(url:, title:)
-    return unless url && title && url != /Enter bookmark here/i && title != /Enter title here/i
+    return unless url && title && url != /Enter URL here/i && title != /Enter title here/i
 
-    connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}','#{title}')")
+    connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}','#{title}') RETURNING id, url, title")
   end
 
   def self.filter_by_title(title)
@@ -28,6 +28,10 @@ class Bookmark
 
   def self.all
     connection.exec('SELECT * FROM bookmarks').map{ |record| Bookmark.new(id: record['id'], url: record['url'], title: record['title']) }
+  end
+
+  def self.delete(id)
+    connection.exec("DELETE FROM bookmarks WHERE id = '#{id}' RETURNING id, url, title")
   end
 
 end

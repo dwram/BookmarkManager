@@ -37,6 +37,14 @@ describe Bookmark do
       #TODO: FILTER ENTRY SPEC
     end
 
+    it '#delete' do
+      id = 7
+      deleted = Bookmark.delete(id).first
+      expect{ Bookmark.delete(id) }.to change{Bookmark.all}
+      expect(deleted['url']).to include 'google'
+      expect(deleted['id']).to eq '7'
+    end
+
   end
 
 end
