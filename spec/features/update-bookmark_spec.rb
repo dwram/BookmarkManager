@@ -14,7 +14,7 @@ feature '#update_bookmark' do
   scenario 'update an entry' do
     fill_in 'update_title', with: 'facebooker', match: :first
     fill_in 'update_url', with: 'https://www.facebooker.com', match: :first
-    click_button 'Update', match: :first
+    click_button('Update', match: :first)
     expect(page).to have_content 'https://www.facebooker.com'
   end
 

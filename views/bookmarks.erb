@@ -10,7 +10,7 @@
 <% @bookmarks.each do |bookmark| %>
     <tr>
       <td><%= bookmark.id %></td>
-      <td><a href="<%= bookmark.url %>"><%= bookmark.title %></a></td>
+      <td><a href="<%= bookmark.url %>"><%= bookmark.title.capitalize %></a></td>
       <td><%= bookmark.url %></td>
       <td>
         <form action="/bookmarks/<%= bookmark.id %>" method="post">
