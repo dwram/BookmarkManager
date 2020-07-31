@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'rack-flash'
 require_relative './models/bookmark'
+require_relative './models/comment'
 require_relative './models/database_script'
 
 class BookmarkManager < Sinatra::Base
@@ -34,8 +35,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks/:id/comments/new' do
-    p params[:comment_text]
-    p params[:id]
+    Comment.add(comment: params[:comment_text], bookmark_id: params[:id])
     redirect to '/bookmarks'
   end
 

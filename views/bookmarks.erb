@@ -32,9 +32,15 @@
         </form>
       </td>
       <td>
+        <% bookmark.comments.each do |comment| %>
+          <ul style="font-size: 14px;">
+              <%= comment.text %>
+          </ul>
+        <% end %>
         <form action="/bookmarks/<%= bookmark.id %>/comments/new" method="post">
-          <input type="text" id="comment_text" name="comment_text">
-          <input type='submit' value='Add comment'>
+            <label for="comment_text"></label>
+            <input type="text" id="comment_text" name="comment_text">
+            <input type='submit' value='Add comment'>
         </form>
       </td>
     </tr>

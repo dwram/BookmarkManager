@@ -2,6 +2,7 @@ require 'pg'
 require 'uri'
 require 'addressable/uri'
 require_relative './database'
+require_relative './comment'
 
 class Bookmark
   attr_reader :url, :title, :id
@@ -12,6 +13,11 @@ class Bookmark
     @id = id
     @url = url
     @title = title
+  end
+
+
+  def comments(comments = Comment)
+    comments.from_bookmark(bookmark_id: @id)
   end
 
   def self.connection
