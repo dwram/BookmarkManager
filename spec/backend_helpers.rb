@@ -17,7 +17,7 @@ end
 def truncation
   return unless ENV['RACK_ENV'] == 'test'
 
-  database.query('TRUNCATE bookmarks, comments RESTART IDENTITY')
+  database.query('TRUNCATE bookmark_tags, tags, bookmarks, comments  RESTART IDENTITY')
   #database.query('ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1')
   #database.query('ALTER SEQUENCE comments_id_seq RESTART WITH 1')
 end

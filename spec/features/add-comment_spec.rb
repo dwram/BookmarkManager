@@ -12,7 +12,7 @@ feature '#add_comment' do
   end
 
   scenario 'add a comment' do
-
+    fill_in 'comment_text', with: 'test_comment'
   end
 
 end

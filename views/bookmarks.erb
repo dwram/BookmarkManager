@@ -7,6 +7,7 @@
     <th>DELETE</th>
     <th>UPDATE</th>
     <th>NEW COMMENT</th>
+    <th>NEW TAG</th>
   </tr>
 <% @bookmarks.each do |bookmark| %>
     <tr>
@@ -42,6 +43,9 @@
             <input type="text" id="comment_text" name="comment_text">
             <input type='submit' value='Add comment'>
         </form>
+      </td>
+      <td>
+        tag
       </td>
     </tr>
 <% end %>
