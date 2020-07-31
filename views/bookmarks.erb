@@ -6,6 +6,7 @@
     <th>URL</th>
     <th>DELETE</th>
     <th>UPDATE</th>
+    <th>NEW COMMENT</th>
   </tr>
 <% @bookmarks.each do |bookmark| %>
     <tr>
@@ -20,7 +21,7 @@
       </td>
       <td>
         <form action="/bookmarks/<%= bookmark.id %>" method="post">
-          <input type="hidden" type="hidden" name="_method" value="PUT">
+          <input type="hidden" type="hidden" name="_method" value="PATCH">
           <label>Update Title</label>
             <input type='text' name='update_title' value='<%= bookmark.title %>'>
           <br><br>
@@ -28,6 +29,12 @@
             <input type='text' name='update_url' value='<%= bookmark.url %>'>
             <br><br>
           <input type='submit' value="Update">
+        </form>
+      </td>
+      <td>
+        <form action="/bookmarks/<%= bookmark.id %>/comments/new" method="post">
+          <input type="text" id="comment_text" name="comment_text">
+          <input type='submit' value='Add comment'>
         </form>
       </td>
     </tr>
@@ -41,3 +48,10 @@
   <input type='text' value='Enter URL here' id='url' name='url'>
   <input type='submit' value='Add Bookmark'>
 </form>
+
+<% flash.keys.each do |type| %>
+  <div data-alert class="flash <%= type %> alert-box radius">
+    <%= flash[type] %>
+    <a href="#" class="close">&times;</a>
+  </div>
+<% end %>

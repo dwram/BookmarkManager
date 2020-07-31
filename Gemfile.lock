@@ -31,6 +31,8 @@ GEM
     pg (1.2.3-x64-mingw32)
     public_suffix (4.0.5)
     rack (2.2.3)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (2.0.8.1)
       rack
     rack-test (1.1.0)
@@ -82,8 +84,6 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.8.1)
       tilt (~> 2.0)
-    sinatra-flash (0.3.0)
-      sinatra (>= 1.0.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     tilt (2.0.10)
@@ -95,15 +95,16 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  addressable
   capybara
   pg
+  rack-flash3
   rerun
   rspec
   rubocop
   simplecov
   simplecov-console
   sinatra
-  sinatra-flash
 
 BUNDLED WITH
    2.1.4

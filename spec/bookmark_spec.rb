@@ -57,7 +57,15 @@ describe Bookmark do
 
     it '#update url missing http' do
       incomplete_update_params
-      expect(incomplete_update_params.first['url']). to eq 'http://www.netflixer.com'
+      expect(incomplete_update_params.first['url']).to eq 'http://www.netflixer.com'
+    end
+
+    it 'fail update tests' do
+      expect(Bookmark.update(id: id, title: 'test543', url: 'test543')).to be_falsey
+      expect(Bookmark.update(id: id, title: 'test543', url: 'http://test543')).to be_falsey
+      expect(Bookmark.update(id: id, title: 'test543', url: 'http://')).to be_falsey
+      expect(Bookmark.update(id: id, title: 'test543', url: 'http:')).to be_falsey
+      expect(Bookmark.update(id: id, title: '', url: 'http://www.nothing.com')).to be_falsey
     end
 
   end

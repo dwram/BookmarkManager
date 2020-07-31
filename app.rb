@@ -1,11 +1,13 @@
 require 'sinatra'
-require 'sinatra/flash'
+require 'rack-flash'
 require_relative './models/bookmark'
 require_relative './models/database_script'
 
 class BookmarkManager < Sinatra::Base
 
   enable :sessions, :method_override
+  use Rack::Flash
+
 
   get '/' do
     erb :index
@@ -17,7 +19,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks/new' do
-    Bookmark.add(url: params[:url], title: params[:title])
+    flash[:notice] = "Invalid URL" unless Bookmark.add(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
 
@@ -26,8 +28,14 @@ class BookmarkManager < Sinatra::Base
     redirect to '/bookmarks'
   end
 
-  put '/bookmarks/:id' do
+  patch '/bookmarks/:id' do
     Bookmark.update(id: params[:id],url: params[:update_url],title: params[:update_title])
+    redirect to '/bookmarks'
+  end
+
+  post '/bookmarks/:id/comments/new' do
+    p params[:comment_text]
+    p params[:id]
     redirect to '/bookmarks'
   end
 

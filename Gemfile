@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'addressable'
 gem 'pg'
 gem 'sinatra'
-gem 'sinatra-flash'
+gem 'rack-flash3'
+
 
 
 group :test do
