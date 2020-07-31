@@ -26,10 +26,10 @@ feature '#add_bookmark' do
 
     scenario 'new bookmark added' do
       expect(page).to have_button('Add Bookmark')
-      fill_in('title', with: 'google')
+      fill_in('title', with: 'Google')
       fill_in('url', with: 'https://www.google.com')
-      submit_bookmark
-      expect(page).to have_link('google', href: 'https://www.google.com')
+      click_button ''
+      expect(page).to have_link('Google', href: 'https://www.google.com')
     end
 
   end

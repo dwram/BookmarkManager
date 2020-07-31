@@ -26,6 +26,8 @@ describe Bookmark do
   context 'pre-populated DB' do
 
     id = 7
+    let(:update) { Bookmark.update(id: id, title: 'netflixer', url: 'https://www.netflixer.com') }
+    let(:incomplete_update_params) { Bookmark.update(id: id, title: 'netflixer', url: 'www.netflixer.com')}
 
     before 'pre-poulate' do
       generate_example_bookmarks
@@ -47,10 +49,15 @@ describe Bookmark do
     end
 
     it '#update' do
-      updated = Bookmark.update(id: id, title: 'netflixer', url: 'https://www.netflixer.com')
+      update
       expect(Bookmark.all.map(&:itself).last.title).to include 'netflixer'
       expect(Bookmark.all.map(&:itself).last.title).not_to be 'netflix'
-      expect(updated.first['title']).to eq 'netflixer'
+      expect(update.first['title']).to eq 'netflixer'
+    end
+
+    it '#update url missing http' do
+      incomplete_update_params
+      expect(incomplete_update_params.first['url']). to eq 'http://www.netflixer.com'
     end
 
   end

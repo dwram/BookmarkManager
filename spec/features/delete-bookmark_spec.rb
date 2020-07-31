@@ -7,7 +7,7 @@ feature '#delete_bookmark' do
   end
 
   scenario 'presence of deletion button' do
-    expect(page).to have_link('google', href: 'https://www.google.com')
+    expect(page).to have_link('Google', href: 'https://www.google.com')
     expect(page).to have_button 'Delete'
   end
 

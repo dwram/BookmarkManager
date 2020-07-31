@@ -1,5 +1,7 @@
 require 'pg'
+require 'uri'
 require_relative './database'
+
 class Bookmark
   attr_reader :url, :title, :id
 
@@ -35,7 +37,14 @@ class Bookmark
   end
 
   def self.update(id:, url:, title:)
+    return p nil unless title && valid?(url)
+
     DatabaseConnection.query("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}' RETURNING id, url, title")
+  end
+
+  def self.valid?(url)
+    url.insert(0, 'http://') unless url.include?('http://') || url.include?('https://')
+    url =~ URI::regexp
   end
 
 end

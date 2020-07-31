@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/flash'
 require_relative './models/bookmark'
 require_relative './models/database_script'
 
