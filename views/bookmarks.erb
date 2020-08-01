@@ -45,7 +45,11 @@
         </form>
       </td>
       <td>
-        tag
+        <form action="/bookmarks/<%= bookmark.id %>/tag/new" method="post">
+          <label for="comment_text"></label>
+          <input type="text" id="tag_text" name="tag_text">
+          <input type='submit' value='Add tag'>
+        </form>
       </td>
     </tr>
 <% end %>

@@ -9,10 +9,6 @@ describe DatabaseConnection do
       expect(DatabaseConnection.setup('bookmark_manager_test').class).to eq PG::Connection
     end
 
-
-
-
   end
-
 
 end

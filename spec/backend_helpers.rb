@@ -10,6 +10,10 @@ def generate_example_bookmarks
    ('https://www.twitch.tv', 'twitch'), ('https://www.reddit.com', 'reddit'), ('https://www.google.com', 'google')")
 end
 
+def generate_example_tags
+  database.query("INSERT INTO tags (content) VALUES('Great'),('Terrible!'),('Amazing front-end!')")
+end
+
 def add_bookmark(url, title)
   database.query("INSERT INTO bookmarks (url, title) VALUES('#{url}','#{title}')")
 end
@@ -17,7 +21,7 @@ end
 def truncation
   return unless ENV['RACK_ENV'] == 'test'
 
-  database.query('TRUNCATE bookmark_tags, tags, bookmarks, comments  RESTART IDENTITY')
+  database.query('TRUNCATE bookmark_tags, tags, bookmarks, comments RESTART IDENTITY')
   #database.query('ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1')
   #database.query('ALTER SEQUENCE comments_id_seq RESTART WITH 1')
 end

@@ -10,7 +10,7 @@ feature 'Index' do
     expect(page).to have_content /bookmark manager/i
   end
 
-  scenario 'presence of bookmarks buttom' do
+  scenario 'presence of bookmarks button' do
     expect(page).to have_button('Bookmarks')
   end
 

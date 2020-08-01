@@ -3,6 +3,7 @@ require 'uri'
 require 'addressable/uri'
 require_relative './database'
 require_relative './comment'
+require_relative './tag'
 
 class Bookmark
   attr_reader :url, :title, :id
@@ -18,6 +19,10 @@ class Bookmark
 
   def comments(comments = Comment)
     comments.from_bookmark(bookmark_id: @id)
+  end
+
+  def get_tags(tags = Tag)
+    tags.from_bookmark(bookmark_id: @id)
   end
 
   def self.connection
