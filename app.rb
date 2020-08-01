@@ -39,5 +39,11 @@ class BookmarkManager < Sinatra::Base
     redirect to '/bookmarks'
   end
 
+  post '/bookmarks/:id/tag/new' do
+    tag_id = Tag.add(content: params[:tag_text]).id
+    BookmarkTags.add(bookmark_id: params[:id], tag_id: tag_id)
+    redirect '/bookmarks'
+  end
+
 
 end

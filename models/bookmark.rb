@@ -16,19 +16,12 @@ class Bookmark
     @title = title
   end
 
-
   def comments(comments = Comment)
     comments.from_bookmark(bookmark_id: @id)
   end
 
   def get_tags(tags = Tag)
-    tags.from_bookmark(bookmark_id: @id)
-  end
-
-  def self.connection
-    ENV['RACK_ENV'] == 'test' ?
-        PG.connect(dbname: 'bookmark_manager_test', user: 'postgres', password: '') :
-        PG.connect(dbname: 'bookmark_manager', user: 'postgres', password: '')
+    tags.on_bookmark(bookmark_id: @id)
   end
 
   def self.add(url:, title:)

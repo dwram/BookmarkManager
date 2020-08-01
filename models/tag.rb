@@ -1,7 +1,8 @@
 require_relative './database_script'
+require_relative './bookmark_tags'
 
 class Tag
-  attr_reader :content, :id
+  attr_reader :content, :id, :bookmark_id
 
   def initialize(content:, id:)
     @id = id
@@ -13,12 +14,9 @@ class Tag
         .map{ |record| return Tag.new(content: record['content'], id: record['id']) } # beware of return
   end
 
-  def self.from_bookmark_tags(bookmark_id:)
-    DatabaseConnection.query("SELECT * FROM bookmark_tags WHERE bookmark_id=#{bookmark_id}")
-        .map{ |record| Tag.new(id: record['id'], content: record['bookmark_id']) }
+  def self.on_bookmark(bookmark_id:)
+    DatabaseConnection.query("SELECT * FROM tags WHERE id IN (SELECT id FROM bookmark_tags WHERE bookmark_id=#{bookmark_id})")
+        .map{ |record| Tag.new(id: record['id'], content: record['content']) }
   end
 
 end
-
-# TODO: Create 'save' method to store the 'add'ed bookmarks to bookmark_tags table
-# TODO: Complete the query from_bookmark_tags to return list of all tags for a particular bookmark

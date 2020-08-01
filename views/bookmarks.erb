@@ -45,6 +45,11 @@
         </form>
       </td>
       <td>
+        <% bookmark.get_tags.each do |tag| %>
+          <ul style="font-size: 14px;">
+            <li> <%= tag.content %> </li>
+          </ul>
+        <% end %>
         <form action="/bookmarks/<%= bookmark.id %>/tag/new" method="post">
           <label for="comment_text"></label>
           <input type="text" id="tag_text" name="tag_text">

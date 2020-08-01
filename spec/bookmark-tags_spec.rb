@@ -7,7 +7,7 @@ describe BookmarkTags do
     generate_example_bookmarks
     generate_example_tags
     bookmark_id = 1; tag_id = 1
-    p new_tag = BookmarkTags.add(bookmark_id: bookmark_id, tag_id: tag_id).first
+    new_tag = BookmarkTags.add(bookmark_id: bookmark_id, tag_id: tag_id).first
     expect(new_tag['id']).to eq '1'
   end
 
