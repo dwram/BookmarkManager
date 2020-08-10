@@ -45,5 +45,5 @@ class BookmarkManager < Sinatra::Base
     redirect '/bookmarks'
   end
 
-
 end
+
